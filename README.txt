@@ -11,7 +11,8 @@ uno analizar.
 	binario especificado contra la libreria dinamica caquita.so, en un intento
 	vano para tener acceso a las variables globales de la libreria dinamica
 
-	en memcheck.c se setea la variable de ambiente LD_PRELOAD para ubicar la 	 libreria dinamica libmemcheck.c como primer opcion al resolver simbolos
+	en memcheck.c se setea la variable de ambiente LD_PRELOAD para establecer la 
+	libreria dinamica libmemcheck.c como primer opcion al resolver simbolos
 
 OBJETIVO
 	poder acceder al conteo de mallocs y frees para reportarlos, yo intente

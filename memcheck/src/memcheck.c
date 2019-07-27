@@ -8,11 +8,10 @@
 
 int main (int argc, char** argv)
 {
-    char* pname = NULL;
-    //char* path = getenv("PWD");
-    char* path = NULL;
-//    char* soPath = getenv("PWD"); OJO NO USAR GETENV CON LA MISMA VAR 2 VECES
+    //char* soPath = getenv("PWD"); //OJO NO USAR GETENV CON LA MISMA VAR 2 VECES
     char* soPath = "/home/maestria/Desktop/Empotrados/homework1/memcheck/lib/caquita.so";
+    //strcat(path, pname);
+
     int c = 0, val = 1;
     pid_t pid;
 
@@ -34,47 +33,19 @@ int main (int argc, char** argv)
                 break;
             case 'p':
                 // New process for running the desired program
-                /*pid=fork();
-                if (pid==0)
-                { // Child process
-                    pname = optarg;
-                    path = getenv("PWD");
-                    strcat(path, pname);
-                    setenv("LD_PRELOAD", soPath, 1);
-
-                    static char *args[]={NULL};
-                    execv(path, args);
-
-                    unsetenv("LD_PRELOAD");
-                }
-                else
-                { // Parent process, wait for child to finish
-                    waitpid(pid,0,0);
-                }
-                printf("Path: %s , name: %s \n", path, pname);*/
-//-----------------------------------------------------------------------
                 pid=fork();
                 if (pid==0)
                 { // Child process
-                    pname = "/mc";
-                    path = getenv("PWD");
-                    strcat(path, pname);
                     setenv("LD_PRELOAD", soPath, 1);
-                    printf("Path: %s \n", path);
 
-                    char *args[]={"mc", optarg, NULL}; //  Call memcheck
-                    execv(path, args);
-
-                    unsetenv("LD_PRELOAD");
-                    printf("Path: %s , name: %s \n", path, pname);
+                    static char *args[]={NULL};
+                    execv(optarg, args);
                 }
                 else
                 { // Parent process, wait for child to finish
                     waitpid(pid,0,0);
                 }
-                printf("SALIMOS DE MC\n");
-//-----------------------------------------------------------------------
-
+                unsetenv("LD_PRELOAD");
                 break;
             case '?':
                 if (optopt == 'p')
